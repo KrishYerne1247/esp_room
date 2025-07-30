@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Little Secret 💕</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ffe6f0, #e6f7ff);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      padding: 30px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #ff69b4;
+      animation: glow 1s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4; }
+      to { text-shadow: 0 0 20px #ff69b4, 0 0 30px #fff; }
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff4d88;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #ff69b4;
+      font-size: 1em;
+      margin: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff1493;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="loginBox">
+    <h1>💖 Our Secret Page 💖</h1>
+    <p>Enter the day we got together (dd/mm/yyyy):</p>
+    <input type="text" id="password" placeholder="e.g., 01/01/2025" />
+    <br />
+    <button onclick="checkPassword()">Unlock</button>
+  </div>
+
+  <div class="container hidden" id="surpriseBox">
+    <h1>🎉 Happy 7 Month Anniversary, My Love! 🎉</h1>
+    <p>You've made my days magical. I can't wait for all the months to come! 💑</p>
+    <audio autoplay loop>
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_61f60b2c28.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="hearts" id="heartField"></div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById("password").value.trim();
+      if (input === "01/01/2025") {
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("surpriseBox").classList.remove("hidden");
+        startHearts();
+      } else {
+        alert("Oops! That's not quite right. Try again!");
+      }
+    }
+
+    function startHearts() {
+      const hearts = ["💖", "💘", "💕", "💓"];
+      const heartField = document.getElementById("heartField");
+
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 24 + 20 + "px";
+        heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+        heartField.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+      }, 300);
+    }
+  </script>
+</body>
+</html>
